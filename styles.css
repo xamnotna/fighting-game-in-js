@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    /*  margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0; */
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.smaller-container {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --------------Player Healthbar---------------- */
+.player-health-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    height: 30px;
+    width: 100%;
+}
+
+.player-health {
+    background-color: red;
+    height: 30px;
+    width: 100%;
+}
+
+.player-health-bar {
+    position: absolute;
+    background-color: yellow;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* --------------Enemy Healthbar---------------- */
+
+.enemy-health-container {
+    position: relative;
+    height: 30px;
+    width: 100%;
+}
+
+.enemy-health {
+    background-color: red;
+    height: 30px;
+}
+
+.enemy-health-bar {
+    position: absolute;
+    background-color: yellow;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+
+.timer-style {
+    background-color: rgb(57, 236, 22);
+    height: 100px;
+    width: 100px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.winner {
+    position: absolute;
+    color: yellow;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
