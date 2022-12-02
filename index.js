@@ -59,6 +59,40 @@ const player = new Fighter({
     offset: {
         x: 0,
         y: 0
+    },
+    imageSrc: './sprites/Yu/Idle.png',
+    framesMax: 10,
+    scale: 0.6,
+    offset: {
+        x: -50,
+        y: 90
+    },
+    sprites: {
+        idle: {
+            imageSrc: './sprites/Yu/Idle.png',
+            framesMax: 10,
+
+        },
+        walk: {
+            imageSrc: './sprites/Yu/Walk.png',
+            framesMax: 11,
+        },
+        jump: {
+            imageSrc: './sprites/Yu/Jump.png',
+            framesMax: 5,
+        },
+        fall: {
+            imageSrc: './sprites/Yu/Fall.png',
+            framesMax: 2,
+        },
+        attack1: {
+            imageSrc: './sprites/Yu/Attack01.png',
+            framesMax: 8,
+        },
+        attack2: {
+            imageSrc: './sprites/Yu/Attack02.png',
+            framesMax: 9,
+        },
     }
 });
 
@@ -103,7 +137,7 @@ function animate() {
     ground2.update();
     onLooker.update();
     player.update();
-    enemy.update();
+    // enemy.update();
 
     player.velocity.x = 0;
     enemy.velocity.x = 0;
@@ -111,8 +145,18 @@ function animate() {
     // PLAYER movement
     if (keys.a.pressed && player.lastkey === 'a') {
         player.velocity.x = -5;
+        player.switchSprite('walk');
     } else if (keys.d.pressed && player.lastkey === 'd') {
         player.velocity.x = 5;
+        player.switchSprite('walk');
+    } else {
+        player.switchSprite('idle');
+    }
+    // PLAYER jump
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump');
+    } else if (player.velocity.y > 0) {
+        player.switchSprite('fall');
     }
 
     // ENEMY movement
@@ -173,7 +217,9 @@ window.addEventListener('keydown', (e) => {
 
         // Player
         case 'w':
-            player.velocity.y = -20;
+            if (player.velocity.y === 0) {
+                player.velocity.y = -15;
+            }
             break;
         case 'a':
             keys.a.pressed = true;
