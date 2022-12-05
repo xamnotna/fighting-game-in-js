@@ -65,7 +65,7 @@ class Fighter extends Sprite {
         });
 
         this.velocity = velocity;
-        this.width = -250;
+        this.width = 50;
         this.height = 150;
         this.lastkey;
         this.attackBox = {
@@ -73,10 +73,7 @@ class Fighter extends Sprite {
                 x: this.position.x + this.width / 2,
                 y: this.position.y + this.height / 2
             },
-            offset: {
-                x: 250,
-                y: 0
-            },
+            offset,
             width: 100,
             height: 50
         }
@@ -134,15 +131,12 @@ class Fighter extends Sprite {
     attack() {
         this.switchSprite('attack1');
         this.isAttacking = true;
+
+
         setTimeout(() => {
             this.isAttacking = false;
+            //this.position.x += 190
         }, 100);
-        // change offset of attack box
-        this.attackBox.offset.x = 100;
-        setTimeout(() => {
-            this.attackBox.offset.x = 100;
-        }, 100);
-
     }
 
     switchSprite(sprite) {
@@ -150,6 +144,14 @@ class Fighter extends Sprite {
             this.framesCurrent < this.sprites.attack1.framesMax - 1
         ) return // if the sprite is already the one we want, return
 
+        // if switch form attack to idle, reset the position
+        if (this.image === this.sprites.attack1.image &&
+            this.framesCurrent === this.sprites.attack1.framesMax - 1 && this === player
+        ) {
+            setTimeout(() => {
+                this.position.x += 190;
+            }, 10);
+        }
 
         switch (sprite) {
             case 'idle':
@@ -158,12 +160,15 @@ class Fighter extends Sprite {
                     this.framesMax = this.sprites.idle.framesMax;
                     this.framesCurrent = 0;
                 }
+
                 break;
             case 'attack1':
                 if (this.image !== this.sprites.attack1.image) {
                     this.image = this.sprites.attack1.image;
                     this.framesMax = this.sprites.attack1.framesMax;
                     this.framesCurrent = 0;
+                    // change position -190p until the attack is done then go back to normal
+                    // this.position.x -= 190;
 
                 }
                 break;
