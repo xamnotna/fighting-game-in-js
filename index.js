@@ -191,14 +191,14 @@ function animate() {
     } else if (player.velocity.y > 0) {
         player.switchSprite('fall');
     }
-    // PLAYER attack
-    if (player.image === player.sprites.attack1.image &&
-        player.framesCurrent === player.sprites.attack1.framesMax - 1
-    ) {
-        setTimeout(() => {
-            player.position.x += 190;
-        }, 10);
-    }
+    /*  // PLAYER attack
+     if (player.image === player.sprites.attack1.image &&
+         player.framesCurrent === player.sprites.attack1.framesMax - 1
+     ) {
+         setTimeout(() => {
+             player.position.x += 190;
+         }, 10);
+     } */
 
     // ENEMY movement
     if (keys.ArrowLeft.pressed && enemy.lastkey === 'ArrowLeft') {
@@ -300,7 +300,11 @@ window.addEventListener('keydown', (e) => {
             break;
         case ' ':
             player.attack();
-            player.position.x -= 190;
+            //player.position.x = 190;
+
+
+            // player.position.x += 190;
+
             break;
     }
 });

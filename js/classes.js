@@ -145,12 +145,14 @@ class Fighter extends Sprite {
         ) return // if the sprite is already the one we want, return
 
         // if switch form attack to idle, reset the position
-        if (this.image === this.sprites.attack1.image &&
-            this.framesCurrent === this.sprites.attack1.framesMax - 1 && this === player
-        ) {
-            setTimeout(() => {
-                this.position.x += 190;
-            }, 10);
+        if (this === player) {
+            if (this.image === this.sprites.attack1.image &&
+                this.framesCurrent === this.sprites.attack1.framesMax - 1
+            ) {
+                setTimeout(() => {
+                    this.position.x += 190;
+                }, 10);
+            }
         }
 
         switch (sprite) {
@@ -168,7 +170,9 @@ class Fighter extends Sprite {
                     this.framesMax = this.sprites.attack1.framesMax;
                     this.framesCurrent = 0;
                     // change position -190p until the attack is done then go back to normal
-                    // this.position.x -= 190;
+                    if (this === player) {
+                        this.position.x -= 190;
+                    }
 
                 }
                 break;
